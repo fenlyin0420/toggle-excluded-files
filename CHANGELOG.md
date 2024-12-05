@@ -5,3 +5,6 @@
 # 1.0.0(12/5/2024)
 - Add a view container to activity bar.
 - You can toggle single hidden file's status by right click the file in the explorer.
+
+# 1.1.0(12/5/2024)
+- Add extension's icon.
