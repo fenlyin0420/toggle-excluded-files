@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 export function activate(context: vscode.ExtensionContext) {
     // 创建一个 Status Bar 按钮
     const toggleButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
-    toggleButton.text = "$(eye) Toggle Excluded Files";  // 使用 eye 图标
+    toggleButton.text = "$(eye)";  // 使用 eye 图标
     toggleButton.tooltip = "Click to hide/show excluded files";
     toggleButton.command = "extension.toggleExcludedFiles";
     toggleButton.show();
