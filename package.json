@@ -3,7 +3,7 @@
   "displayName": "Toggle Excluded Files Fenlyin",
   "publisher": "fenlyin",
   "description": "This extension can be used to toggle hidden files in the status bar.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
         {
           "id": "excludedFilesContainer",
           "title": "Excluded Files",
-          "icon": "image/excluded-files-icon.svg" 
+          "icon": "image/excluded-files-icon.svg"
         }
       ]
     },
