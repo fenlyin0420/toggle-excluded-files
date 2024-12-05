@@ -14,3 +14,6 @@
 
 # 1.2.1(12/5/2024)
 - Fix the some bugs.
+
+# 1.2.2(12/5/2024)
+- Add demonstration gif in readme file.
