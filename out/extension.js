@@ -37,26 +37,62 @@ exports.activate = activate;
 exports.deactivate = deactivate;
 const vscode = __importStar(require("vscode"));
 function activate(context) {
-    // 创建一个 Status Bar 按钮
-    const toggleButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
-    toggleButton.text = "$(eye) Toggle Excluded Files"; // 使用 eye 图标
-    toggleButton.tooltip = "Click to hide/show excluded files";
-    toggleButton.command = "extension.toggleExcludedFiles";
-    toggleButton.show();
-    // 注册命令
-    const disposable = vscode.commands.registerCommand('extension.toggleExcludedFiles', async () => {
+    // 注册活动栏视图
+    vscode.window.registerTreeDataProvider('excludedFilesView', new ExcludedFilesProvider(context));
+    console.log('Congratulations, your extension "toggle-excluded-files" is now active!');
+    // 注册命令：切换文件隐藏状态
+    context.subscriptions.push(vscode.commands.registerCommand('extension.toggleFileState', async (fileKey) => {
         const config = vscode.workspace.getConfiguration();
         const currentSetting = config.get('files.exclude') || {};
-        let newSetting = {
-            ...currentSetting,
-        };
-        for (let key in newSetting) {
-            newSetting[key] = !newSetting[key];
-        }
-        await config.update('files.exclude', newSetting, vscode.ConfigurationTarget.Workspace);
-        vscode.window.showInformationMessage(`Toggled file exclusion setting.`);
-    });
-    context.subscriptions.push(disposable, toggleButton);
+        // 切换当前文件的隐藏状态
+        currentSetting[fileKey] = !currentSetting[fileKey];
+        // 更新配置
+        await config.update('files.exclude', currentSetting, vscode.ConfigurationTarget.Workspace);
+    }));
+}
+class ExcludedFilesProvider {
+    context;
+    _onDidChangeTreeData = new vscode.EventEmitter();
+    onDidChangeTreeData = this._onDidChangeTreeData.event;
+    constructor(context) {
+        this.context = context;
+        vscode.workspace.onDidChangeConfiguration((e) => {
+            if (e.affectsConfiguration('files.exclude')) {
+                this.refresh();
+            }
+        });
+    }
+    refresh() {
+        this._onDidChangeTreeData.fire();
+    }
+    getTreeItem(element) {
+        return element;
+    }
+    async getChildren() {
+        const config = vscode.workspace.getConfiguration();
+        const currentSetting = config.get('files.exclude') || {};
+        return Object.keys(currentSetting).map((fileKey) => new FileItem(fileKey, currentSetting[fileKey], vscode.TreeItemCollapsibleState.None, {
+            command: 'extension.toggleFileState',
+            title: '',
+            arguments: [fileKey],
+        }));
+    }
+}
+class FileItem extends vscode.TreeItem {
+    label;
+    isExcluded;
+    collapsibleState;
+    command;
+    constructor(label, isExcluded, collapsibleState, command) {
+        super(label, collapsibleState);
+        this.label = label;
+        this.isExcluded = isExcluded;
+        this.collapsibleState = collapsibleState;
+        this.command = command;
+        // 动态添加图标
+        this.iconPath = new vscode.ThemeIcon(this.isExcluded ? 'check' : 'circle-outline');
+        this.contextValue = this.isExcluded ? 'excluded' : 'included';
+    }
 }
 function deactivate() { }
 //# sourceMappingURL=extension.js.map

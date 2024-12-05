@@ -9,3 +9,8 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 **/.vscode-test.*
+**/test
+NoteBook.md
+.vsixmanifest
+node_modules
+

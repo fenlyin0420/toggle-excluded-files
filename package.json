@@ -1,8 +1,8 @@
 {
   "name": "toggle-excluded-files-fenlyin",
-  "displayName": "Toggle Excluded Files",
+  "displayName": "Toggle Excluded Files Fenlyin",
   "publisher": "fenlyin",
-  "description": "This extension can be used to toggle hidden files in the explorer.",
+  "description": "This extension can be used to toggle hidden files in the status bar.",
   "version": "0.0.1",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,27 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.toggleExcludedFiles",
-        "title": "Toggle Hidden Excluded Files"
+        "command": "extension.toggleFileState",
+        "title": "Toggle File State"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "excludedFilesContainer",
+          "title": "Excluded Files",
+          "icon": "image/excluded-files-icon.svg" 
+        }
+      ]
+    },
+    "views": {
+      "excludedFilesContainer": [
+        {
+          "id": "excludedFilesView",
+          "name": "Excluded Files"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
