@@ -5,6 +5,10 @@
   "description": "This extension can be used to toggle hidden files in the explorer.",
   "version": "0.0.1",
   "license": "MIT",
+  "reponsitory": {
+    "type": "git",
+    "url": "https://github.com/fenlyin0420/toggle-excluded-files.git"
+  },
   "engines": {
     "vscode": "^1.95.0"
   },
