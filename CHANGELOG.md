@@ -1,9 +1,7 @@
-# Change Log
+# 0.0.1(12/5/2024)
+- Initial release. The toggle button is in the status bar.
+- When click the toggle button, all the hidden files' status will be toggled.
 
-All notable changes to the "fenlyin-first" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+# 1.0.0(12/5/2024)
+- Add a view container to activity bar.
+- You can toggle single hidden file's status by right click the file in the explorer.
