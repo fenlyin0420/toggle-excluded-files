@@ -22,10 +22,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "first.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "extension.toggleExcludedFiles",
         "title": "Toggle Hidden Excluded Files"
       }
@@ -50,14 +46,7 @@
     "eslint": "^9.13.0",
     "typescript": "^5.6.3"
   },
-  "depenencies": {
-    "fenlyin-first": "file:",
-    "first": "file:"
-  },
   "dependencies": {
-    "first": "file:",
-    "toggle-excluded-files": "file:",
-    "Toggle-Excluded-Files": "file:",
-    "toggleExcludedFiles": "file:"
+    "toggle-excluded-files": "file:"
   }
 }
